@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import Provider from '@/app/_trpc/Provider'
 import { SidebarProvider } from '@/components/ui/sidebar'
+import { Toaster } from 'sonner'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -19,7 +20,10 @@ export default function RootLayout({
           <SidebarProvider>
             <main className='flex justify-between min-h-screen bg-slate-500 w-full'>
               {/* <AppSidebar /> */}
-              <div className='flex-1 bg-green-500'>{children}</div>
+              <div className='flex-1 bg-green-500'>
+                {children}
+                <Toaster richColors position='top-center' />
+              </div>
             </main>
           </SidebarProvider>
         </Provider>
