@@ -40,7 +40,7 @@ export function useSketchEditorMount(sketch: Sketch | undefined) {
           padding: 32,
         })
 
-        const base64PreviewImage = await svgToBase64(result?.svg ?? '')
+        const base64PreviewImage = await svgToBase64(result?.svg)
 
         updateSketch.mutate({
           id: sketch?.id ?? '',

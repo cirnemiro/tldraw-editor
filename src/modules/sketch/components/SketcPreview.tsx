@@ -3,17 +3,15 @@
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { Card, CardContent } from '@/components/ui/card'
+import { Sketch } from '../domain/schemas'
 
 type SketchCardPreviewProps = {
-  sketch: {
-    id: string
-    name: string
-    content: string
-    preview: string
-  }
+  sketch: Sketch
 }
 
 export function SketchCardPreview({ sketch }: SketchCardPreviewProps) {
+  console.log('sketch', sketch)
+
   const router = useRouter()
   return (
     <Card
@@ -21,12 +19,18 @@ export function SketchCardPreview({ sketch }: SketchCardPreviewProps) {
       onClick={() => router.push(`/editor/${sketch.id}`)}
     >
       <div className='relative w-full h-[200px] bg-muted'>
-        <Image
-          src={sketch.preview}
-          alt={sketch.name}
-          fill
-          className='object-cover'
-        />
+        {sketch.preview === null ? (
+          <div className='flex items-center justify-center h-full text-muted-foreground'>
+            No Preview Available
+          </div>
+        ) : (
+          <Image
+            src={sketch.preview}
+            alt={sketch.name}
+            fill
+            className='object-cover'
+          />
+        )}
       </div>
       <CardContent className='text-sm font-medium p-2 truncate'>
         {sketch.name}

@@ -1,4 +1,7 @@
-export const svgToBase64 = async (svg: string): Promise<string> => {
+export const svgToBase64 = async (
+  svg: string | undefined
+): Promise<string | null> => {
+  if (!svg) return null
   const svgBlob = new Blob([svg], { type: 'image/svg+xml' })
   const url = URL.createObjectURL(svgBlob)
 

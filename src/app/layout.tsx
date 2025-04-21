@@ -1,9 +1,8 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import Provider from '@/app/_trpc/Provider'
-import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
+import { SidebarProvider } from '@/components/ui/sidebar'
 import { AppSidebar } from '@/components/ui/app-sidebar'
-import { Separator } from '@radix-ui/react-separator'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -16,23 +15,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body>
+      <body className='flex h-screen w-screen overflow-hidden'>
         <Provider>
           <SidebarProvider>
             <AppSidebar />
-            <SidebarInset>
-              <header className='flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12'>
-                <div className='flex items-center gap-2 px-4'>
-                  <Separator
-                    orientation='vertical'
-                    className='mr-2 data-[orientation=vertical]:h-4'
-                  />
-                </div>
-              </header>
-              <div className='flex flex-1 flex-col gap-4 p-4 pt-0'>
-                {children}
-              </div>
-            </SidebarInset>
+            <main className='flex-1 overflow-auto p-4'>{children}</main>
           </SidebarProvider>
         </Provider>
       </body>
