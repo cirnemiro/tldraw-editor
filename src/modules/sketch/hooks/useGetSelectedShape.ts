@@ -28,8 +28,11 @@ export const useGetSelectedShape = (editor: Editor) => {
     }
 
     const base64image = await svgToBase64(svgElement.svg)
-    setSelectedShape(base64image)
-    console.log('svgstring', base64image)
+    if (base64image) {
+      setSelectedShape(base64image)
+    } else {
+      setError('Error al convertir el SVG a Base64.')
+    }
   }, [editor])
 
   const deleteSelectedShape = () => {

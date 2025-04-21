@@ -1,4 +1,9 @@
-export const base64ToFile = (base64: string, filename: string): File => {
+export const base64ToFile = (
+  base64: string | undefined,
+  filename: string
+): File => {
+  if (!base64) return new File([], filename)
+
   const byteString = atob(base64.split(',')[1])
   const mimeString = base64.split(',')[0].split(':')[1].split(';')[0]
 

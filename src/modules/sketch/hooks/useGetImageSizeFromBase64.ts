@@ -1,6 +1,7 @@
 export const getImageSizeFromBase64 = (
-  base64: string
+  base64: string | undefined
 ): Promise<{ width: number; height: number }> => {
+  if (!base64) return Promise.resolve({ width: 512, height: 512 })
   return new Promise((resolve, reject) => {
     const img = new Image()
     img.src = base64

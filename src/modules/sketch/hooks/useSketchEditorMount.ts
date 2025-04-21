@@ -45,7 +45,7 @@ export function useSketchEditorMount(sketch: Sketch | undefined) {
         updateSketch.mutate({
           id: sketch?.id ?? '',
           content,
-          preview: base64PreviewImage,
+          preview: base64PreviewImage ?? null,
         })
       }, 1000)
 
