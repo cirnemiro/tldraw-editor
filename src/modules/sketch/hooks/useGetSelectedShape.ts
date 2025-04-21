@@ -14,8 +14,6 @@ export const useGetSelectedShape = (editor: Editor) => {
     const selectedIds = editor.getSelectedShapeIds()
 
     if (selectedIds.length === 0) {
-      console.log('No hay formas seleccionadas.')
-
       toast.error('No hay formas seleccionadas.')
       return
     }

@@ -47,7 +47,6 @@ export async function POST(req: NextRequest) {
     })
 
     const data = await response.json()
-    console.log(data)
 
     const rawSvg = data?.choices?.[0]?.message?.content || ''
 
@@ -64,9 +63,8 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ svg: cleanSvg })
   } catch (error) {
-    console.error('Error al generar SVG:', error)
     return NextResponse.json(
-      { error: 'Fallo en la generación del SVG.' },
+      { error: 'Fallo en la generación del SVG.', details: error },
       { status: 500 }
     )
   }

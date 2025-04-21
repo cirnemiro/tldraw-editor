@@ -1,13 +1,14 @@
 import { z } from 'zod'
 
-export type SketchFormTypes = {
-  prompt: string
-  image: string | null
-}
-
 export const createSketchFormSchema = z.object({
   name: z.string().min(1, {
     message: 'El nombre es requerido',
+  }),
+})
+
+export const generateSketchFormSchema = z.object({
+  prompt: z.string().min(1, {
+    message: 'El promp es requerido',
   }),
 })
 
@@ -28,3 +29,4 @@ export const updateSketchInput = sketchSchema.pick({
 export type Sketch = z.infer<typeof sketchSchema>
 export type UpdateSketchInput = z.infer<typeof updateSketchInput>
 export type CreateSketchFormSchema = z.infer<typeof createSketchFormSchema>
+export type GenerateSketchFormSchema = z.infer<typeof generateSketchFormSchema>

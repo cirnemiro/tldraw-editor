@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+🧠 Sketch Editor with AI & Real-Time Collaboration
+A powerful sketching application built with Next.js 14, tRPC, Drizzle ORM, and Tldraw v2, featuring real-time drawing, AI-based shape generation, auto-saving, and a modular architecture optimized for scalability.
 
-## Getting Started
+🚀 Tech Stack
 
-First, run the development server:
+Technology Purpose
+Next.js 14 (App Router) SSR, routing, layout system
+tRPC Type-safe API layer without REST overhead
+Drizzle ORM Modern SQL ORM for SQLite or PostgreSQL
+NeonDB Serverless PostgreSQL hosting (used in production)
+Tldraw v2 Real-time collaborative sketch editor
+Tailwind CSS Utility-first styling framework
+ShadCN/UI Accessible and beautiful React components
+Zod Schema validation and type inference
+Vercel Instant deploys with serverless support
+✨ Features
+📝 Sketch Editor (Tldraw)
+Embedded Tldraw canvas at /editor/[id]
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Supports:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Free drawing and shape creation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Importing/exporting shapes
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Snapshot-based storage with getSnapshot and loadSnapshot
 
-## Learn More
+Auto-saving using debounce logic
 
-To learn more about Next.js, take a look at the following resources:
+Live preview thumbnail generation (Base64 PNG)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Syncs with database via tRPC mutation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+🤖 AI-Powered Sketch Generation
+Custom sidebar tool: "Sketch Generation with AI"
 
-## Deploy on Vercel
+Accepts a text prompt
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Calls your AI API to generate an SVG image
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Renders the SVG on canvas automatically
+
+Allows re-generating or clearing the shape selection
+
+Fully integrated with react-hook-form and Zod validation
+
+📚 Project Structure
+bash
+Copia
+Modifica
+/src
+/modules
+/sketch
+/components → Forms, canvas UI, buttons
+/hooks → Editor mount, autosave, selection handlers
+/domain → Zod schemas and types
+/utils → SVG converters (e.g., SVG to Base64)
+/db
+schema.ts → Drizzle schema definition
+/app
+/editor/[id] → Sketch editor route
+/dashboard → List of all sketches
+🧪 Other Features
+Sketch metadata is stored in Drizzle + NeonDB
+
+Each sketch has:
+
+id (UUID)
+
+name
+
+content (Tldraw snapshot)
+
+done (status)
+
+preview (Base64 image)
+
+Sidebar with dynamic navigation based on existing sketches
+
+Routes are validated via params and conditional redirection
+
+Form system using shadcn/ui + react-hook-form + zod

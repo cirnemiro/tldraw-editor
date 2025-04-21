@@ -17,10 +17,17 @@ import { Input } from '@/components/ui/input'
 import { createSketchFormSchema } from '../domain/schemas'
 import { trpc } from '@/app/_trpc/client'
 import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
 
 export function CreateSketchForm() {
   const router = useRouter()
-  const addSketch = trpc.addSketch.useMutation()
+  const utils = trpc.useUtils()
+  const addSketch = trpc.addSketch.useMutation({
+    onSuccess: () => {
+      toast.success('Sketch created successfully')
+      utils.getSketches.invalidate()
+    },
+  })
   const form = useForm({
     resolver: zodResolver(createSketchFormSchema),
     defaultValues: {
@@ -29,7 +36,6 @@ export function CreateSketchForm() {
   })
   const onSubmit = async (data: z.infer<typeof createSketchFormSchema>) => {
     const sketch = await addSketch.mutateAsync(data)
-    console.log(sketch)
 
     router.push('/editor/' + sketch.id)
   }
@@ -50,7 +56,9 @@ export function CreateSketchForm() {
             </FormItem>
           )}
         />
-        <Button type='submit'>Crete</Button>
+        <Button type='submit' disabled={form.formState.isSubmitting}>
+          {form.formState.isSubmitting ? 'Creating...' : 'Create sketch'}
+        </Button>
       </form>
     </Form>
   )

@@ -10,8 +10,6 @@ type SketchCardPreviewProps = {
 }
 
 export function SketchCardPreview({ sketch }: SketchCardPreviewProps) {
-  console.log('sketch', sketch)
-
   const router = useRouter()
   return (
     <Card

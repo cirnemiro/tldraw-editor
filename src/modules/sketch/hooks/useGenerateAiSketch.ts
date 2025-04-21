@@ -2,14 +2,16 @@ import { Editor } from '@tldraw/tldraw'
 import { useState } from 'react'
 import { base64ToFile } from '../utils/converters/base64ToFile'
 import { svgToBase64 } from '../utils/converters/svgToBase64'
-import { SketchFormTypes } from '../domain/schemas'
 import { getImageSizeFromBase64 } from './useGetImageSizeFromBase64'
+import { GenerateSketchFormSchema } from '../domain/schemas'
 
 export default function useGenerateAiSketch(editor: Editor) {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<null | string>(null)
 
-  const handleGenerate = async (values: SketchFormTypes) => {
+  const handleGenerate = async (
+    values: GenerateSketchFormSchema & { image: string | null }
+  ) => {
     if (!values.prompt.trim()) return
 
     setIsLoading(true)

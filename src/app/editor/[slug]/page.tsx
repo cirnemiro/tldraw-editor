@@ -25,7 +25,7 @@ export default function EditorPage() {
   if (error) return <div>Error loading sketch</div>
 
   return (
-    <div style={{ position: 'fixed', inset: 0 }}>
+    <div style={{ position: 'fixed', inset: 0, left: 47 }}>
       <Tldraw onMount={handleMount}>
         <GenerateSketchForm />
       </Tldraw>

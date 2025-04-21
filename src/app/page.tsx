@@ -1,6 +1,5 @@
 'use client'
 import { trpc } from './_trpc/client'
-import { Separator } from '@radix-ui/react-separator'
 
 import { SketchCardPreview } from '@/modules/sketch/components/SketcPreview'
 import { CreateSketchDialog } from '@/modules/dashboard/components/CreateSketchDialog'
@@ -17,16 +16,12 @@ export default function Page() {
         <h1 className='text-2xl font-bold'>Sketches</h1>
         <CreateSketchDialog />
       </div>
-      <div className='w-full overflow-x-auto'>
-        <div className='flex gap-4 w-max'>
+      <div className='w-full '>
+        <div className='flex flex-wrap gap-4 p-6'>
           {sketches?.map((sketch) => (
             <SketchCardPreview sketch={sketch} key={sketch.id} />
           ))}
         </div>
-      </div>
-      <Separator className='my-4' />
-      <div className='flex justify-between items-center'>
-        <h1 className='text-2xl font-bold'>Prompts</h1>
       </div>
     </div>
   )
