@@ -41,13 +41,24 @@ export const appRouter = router({
   }),
 
   updateSketch: publicProcedure
-    .input(z.object({ id: z.string(), content: z.string() }))
+    .input(
+      z.object({
+        id: z.string(),
+        content: z.string(),
+        preview: z.string().nullable(),
+      })
+    )
     .mutation(async ({ input }) => {
-      await db
+      const result = await db
         .update(sketches)
-        .set({ content: input.content })
+        .set({
+          content: input.content,
+          preview: input.preview,
+        })
         .where(eq(sketches.id, input.id))
         .run()
+
+      return result
     }),
 })
 

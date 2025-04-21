@@ -5,4 +5,5 @@ export const sketches = sqliteTable('sketches', {
   name: text('name').notNull(),
   content: text('content'),
   done: integer('done').default(0).notNull(),
+  preview: text('preview'),
 })

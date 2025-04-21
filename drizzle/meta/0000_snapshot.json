@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "5135dece-1470-4af0-a7d5-588cf30b113a",
+  "id": "bf06d121-d8f3-4831-995d-d33f1f199543",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "sketches": {
@@ -35,6 +35,13 @@
           "notNull": true,
           "autoincrement": false,
           "default": 0
+        },
+        "preview": {
+          "name": "preview",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
         }
       },
       "indexes": {},

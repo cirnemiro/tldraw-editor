@@ -10,6 +10,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { CreateSketchForm } from '@/modules/sketch/components/CreateSketchForm'
+import { SketchCardPreview } from '@/modules/sketch/components/SketcPreview'
 
 export default function Page() {
   const { data: sketches, isLoading, error } = trpc.getSketches.useQuery()
@@ -37,7 +38,14 @@ export default function Page() {
       </div>
       <ul>
         {sketches?.map((sketch) => (
-          <li key={sketch.id}>{sketch.name}</li>
+          <SketchCardPreview
+            sketch={{
+              ...sketch,
+              content: sketch.content ?? '',
+              preview: sketch.preview ?? '',
+            }}
+            key={sketch.id}
+          />
         ))}
       </ul>
       <Separator className='my-4' />
