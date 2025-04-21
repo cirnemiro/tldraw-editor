@@ -1,4 +1,5 @@
 // src/server/api/root.ts
+import { v4 as uuidv4 } from 'uuid'
 import { publicProcedure, router } from './trpc'
 import { db } from '../db'
 import { sketches } from '@/db/schema'
@@ -11,20 +12,36 @@ export const appRouter = router({
   }),
 
   addSketch: publicProcedure
-    .input(z.object({ name: z.string(), content: z.string() }))
+    .input(z.object({ name: z.string() }))
     .mutation(async ({ input }) => {
-      await db
+      const id = uuidv4()
+      const [createdSketch] = await db
         .insert(sketches)
         .values({
-          content: input.content,
+          id: id,
           name: input.name,
           done: 0,
         })
-        .run()
+        .returning()
+
+      return createdSketch
     }),
 
+  getSketchById: publicProcedure.input(z.string()).query(async ({ input }) => {
+    const [sketch] = await db
+      .select()
+      .from(sketches)
+      .where(eq(sketches.id, input))
+
+    if (!sketch) {
+      throw new Error('Sketch not found')
+    }
+
+    return sketch
+  }),
+
   updateSketch: publicProcedure
-    .input(z.object({ id: z.number(), content: z.string() }))
+    .input(z.object({ id: z.string(), content: z.string() }))
     .mutation(async ({ input }) => {
       await db
         .update(sketches)

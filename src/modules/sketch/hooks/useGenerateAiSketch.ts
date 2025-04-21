@@ -2,7 +2,7 @@ import { Editor } from '@tldraw/tldraw'
 import { useState } from 'react'
 import { base64ToFile } from '../utils/converters/base64ToFile'
 import { svgToBase64 } from '../utils/converters/svgToBase64'
-import { SketchFormTypes } from '../types/generateSketchFormTypes'
+import { SketchFormTypes } from '../domain/schemas'
 import { getImageSizeFromBase64 } from './useGetImageSizeFromBase64'
 
 export default function useGenerateAiSketch(editor: Editor) {

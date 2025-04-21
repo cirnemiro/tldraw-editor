@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import Provider from '@/app/_trpc/Provider'
-import { SidebarProvider } from '@/components/ui/sidebar'
-import { Toaster } from 'sonner'
+import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
+import { AppSidebar } from '@/components/ui/app-sidebar'
+import { Separator } from '@radix-ui/react-separator'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -18,13 +19,20 @@ export default function RootLayout({
       <body>
         <Provider>
           <SidebarProvider>
-            <main className='flex justify-between min-h-screen bg-slate-500 w-full'>
-              {/* <AppSidebar /> */}
-              <div className='flex-1 bg-green-500'>
+            <AppSidebar />
+            <SidebarInset>
+              <header className='flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12'>
+                <div className='flex items-center gap-2 px-4'>
+                  <Separator
+                    orientation='vertical'
+                    className='mr-2 data-[orientation=vertical]:h-4'
+                  />
+                </div>
+              </header>
+              <div className='flex flex-1 flex-col gap-4 p-4 pt-0'>
                 {children}
-                <Toaster richColors position='top-center' />
               </div>
-            </main>
+            </SidebarInset>
           </SidebarProvider>
         </Provider>
       </body>
