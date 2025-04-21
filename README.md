@@ -1,82 +1,82 @@
-🧠 Sketch Editor with AI & Real-Time Collaboration
-A powerful sketching application built with Next.js 14, tRPC, Drizzle ORM, and Tldraw v2, featuring real-time drawing, AI-based shape generation, auto-saving, and a modular architecture optimized for scalability.
+# 🧠 Sketch Editor with AI & Real-Time Collaboration
 
-🚀 Tech Stack
+> A powerful sketching application built with **Next.js 15**, **tRPC**, **Drizzle ORM**, and **Tldraw v2**, featuring real-time drawing, AI-based shape generation, auto-saving, and a modular architecture optimized for scalability.
 
-Technology Purpose
-Next.js 14 (App Router) SSR, routing, layout system
-tRPC Type-safe API layer without REST overhead
-Drizzle ORM Modern SQL ORM for SQLite or PostgreSQL
-NeonDB Serverless PostgreSQL hosting (used in production)
-Tldraw v2 Real-time collaborative sketch editor
-Tailwind CSS Utility-first styling framework
-ShadCN/UI Accessible and beautiful React components
-Zod Schema validation and type inference
-Vercel Instant deploys with serverless support
-✨ Features
-📝 Sketch Editor (Tldraw)
-Embedded Tldraw canvas at /editor/[id]
+---
 
-Supports:
+## 🚀 Tech Stack
 
-Free drawing and shape creation
+| Technology       | Purpose                                |
+| ---------------- | -------------------------------------- |
+| **Next.js 15**   | App Router, layout system              |
+| **tRPC**         | Type-safe API                          |
+| **Drizzle ORM**  | Modern SQL ORM for SQLite/PostgreSQL   |
+| **Tldraw v2**    | Real-time drawing engine               |
+| **Tailwind CSS** | Utility-first styling framework        |
+| **ShadCN/UI**    | Beautiful, accessible React components |
+| **Zod**          | Schema validation and type inference   |
+| **OpenAI**       | AI-powered SVG generation from prompts |
 
-Importing/exporting shapes
+---
 
-Snapshot-based storage with getSnapshot and loadSnapshot
+## ✨ Features
 
-Auto-saving using debounce logic
+### 📝 Sketch Editor
 
-Live preview thumbnail generation (Base64 PNG)
+- Embedded `Tldraw` canvas at `/editor/[id]`
+- Supports:
+  - Free drawing and shape creation
+  - Snapshot-based storage via `getSnapshot` & `loadSnapshot`
+  - Auto-saving using debounce
+  - Live Base64 image preview generation
+  - tRPC mutation updates content and preview
 
-Syncs with database via tRPC mutation
+---
 
-🤖 AI-Powered Sketch Generation
-Custom sidebar tool: "Sketch Generation with AI"
+### 🤖 AI-Powered Sketch Generation
 
-Accepts a text prompt
+- 🧠 Form integrated into the editor page
+- Accepts text **prompt** to describe the shape
+- Accepts image **prompt** to describe/redo the shape
+- Uses `svgToBase64()` utility for rendering
+- Shape is rendered and imported directly into Tldraw canvas
+- Form built with `react-hook-form`, `zod`, and `shadcn/ui`
 
-Calls your AI API to generate an SVG image
+---
 
-Renders the SVG on canvas automatically
+### 💾 Smart Autosave
 
-Allows re-generating or clearing the shape selection
+- ⏱️ Snapshot saving is **debounced every 1 second** on canvas changes
+- 🖼️ A **base64 preview image** is automatically generated from the current selection
+- 🧠 Uses `editor.getSvgString()` from Tldraw to generate the preview
+- 🪄 Fully integrated with `tRPC` to update the sketch content and preview in real-time
+- 🧩 Wrapped in a custom hook for clean integration in the editor logic
 
-Fully integrated with react-hook-form and Zod validation
+## 🛠️ Getting Started
 
-📚 Project Structure
-bash
-Copia
-Modifica
-/src
-/modules
-/sketch
-/components → Forms, canvas UI, buttons
-/hooks → Editor mount, autosave, selection handlers
-/domain → Zod schemas and types
-/utils → SVG converters (e.g., SVG to Base64)
-/db
-schema.ts → Drizzle schema definition
-/app
-/editor/[id] → Sketch editor route
-/dashboard → List of all sketches
-🧪 Other Features
-Sketch metadata is stored in Drizzle + NeonDB
+Follow these steps to get the project up and running locally:
 
-Each sketch has:
+### 1. 📦 Install Dependencies
 
-id (UUID)
+Use [pnpm](https://pnpm.io/) for dependency management:
 
-name
+```bash
+pnpm install
+```
 
-content (Tldraw snapshot)
+### 2. 🧱 Initialize the Drizzle Database
 
-done (status)
+Init [drizzle](https://orm.drizzle.team/docs/get-started-sqlite) database instance
 
-preview (Base64 image)
+```bash
+pnpm drizzle-kit push      # Push schema to the database
+pnpm drizzle-kit generate  # Generate Drizzle client + migrations
+```
 
-Sidebar with dynamic navigation based on existing sketches
+### 3. 🚀 Start the Development Server
 
-Routes are validated via params and conditional redirection
+Run the Next.js development server:
 
-Form system using shadcn/ui + react-hook-form + zod
+```bash
+pnpm dev
+```

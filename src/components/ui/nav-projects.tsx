@@ -11,7 +11,7 @@ import { trpc } from '@/app/_trpc/client'
 import Link from 'next/link'
 import { Sketch } from '@/modules/sketch/domain/schemas'
 import { usePathname } from 'next/navigation'
-import clsx from 'clsx'
+import { cn } from './lib/utils'
 
 export function NavProjects() {
   const { data: sketches } = trpc.getSketches.useQuery()
@@ -22,7 +22,7 @@ export function NavProjects() {
       <SidebarGroupLabel>General</SidebarGroupLabel>
       <SidebarMenu>
         <SidebarMenuItem
-          className={clsx({ 'bg-muted text-primary': pathname === '/' })}
+          className={cn({ 'bg-muted text-primary': pathname === '/' })}
         >
           <SidebarMenuButton asChild>
             <Link href='/'>Dashboard</Link>
@@ -38,7 +38,7 @@ export function NavProjects() {
           return (
             <SidebarMenuItem
               key={sketch.id}
-              className={clsx({ 'bg-muted text-primary': isActive })}
+              className={cn({ 'bg-muted text-primary': isActive })}
             >
               <SidebarMenuButton asChild>
                 <Link href={`/editor/${sketch.id}`}>
