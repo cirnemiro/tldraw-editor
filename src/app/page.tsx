@@ -2,7 +2,7 @@
 import { trpc } from './_trpc/client'
 
 import { SketchCardPreview } from '@/modules/sketch/components/SketcPreview'
-import { CreateSketchDialog } from '@/modules/dashboard/components/CreateSketchDialog'
+import { CreateSketchDialog } from '@/modules/sketch/components/CreateSketchDialog'
 
 export default function Page() {
   const { data: sketches, isLoading, error } = trpc.getSketches.useQuery()
