@@ -69,8 +69,8 @@ pnpm install
 Init [drizzle](https://orm.drizzle.team/docs/get-started-sqlite) database instance
 
 ```bash
-pnpm drizzle-kit push      # Push schema to the database
 pnpm drizzle-kit generate  # Generate Drizzle client + migrations
+pnpm drizzle-kit push      # Push schema to the database
 ```
 
 ### 3. 🚀 Start the Development Server
@@ -80,3 +80,16 @@ Run the Next.js development server:
 ```bash
 pnpm dev
 ```
+
+### 3. 🔑 Connect your OpenAI Secret
+
+To unlock the AI-powered SVG generator, you need to add your OpenAI API key to your environment variables.
+
+#### 🛠️ Steps
+
+1. Create a `.env` file in the root of the project (if it doesn't exist).
+2. Add the following line to the file:
+
+   ```env
+   OPENAI_API_KEY=your_openai_api_key_here
+   ```

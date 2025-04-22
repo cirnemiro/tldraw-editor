@@ -14,7 +14,12 @@ export async function POST(req: NextRequest) {
           content: [
             {
               type: 'text',
-              text: `Basándote en esta imagen y en el prompt: "${prompt}", genera un SVG autocontenible usando <svg>, <rect>, <circle>, <line>, <text>. No incluyas explicaciones, solo el SVG.`,
+              text: `Eres un experto diseñador gráfico especializado en convertir imágenes en ilustraciones SVG minimalistas, limpias y semánticas. Tu estilo está basado en precisión geométrica y claridad visual. Tienes dominio avanzado de las etiquetas SVG: <svg>, <rect>, <circle>, <line> y <text>, y sabes cuándo usarlas para representar elementos visuales de forma eficaz. 
+
+Basándote únicamente en la imagen proporcionada y en el siguiente prompt: "${prompt}", genera un SVG autocontenible que represente de forma precisa el contenido y estilo de la imagen. Utiliza únicamente etiquetas SVG válidas (<svg>, <rect>, <circle>, <line>, <text>) y atributos CSS inline si es necesario.
+
+No añadas explicaciones, comentarios ni contenido adicional fuera del SVG.
+`,
             },
             {
               type: 'image_url',
@@ -28,7 +33,9 @@ export async function POST(req: NextRequest) {
     : [
         {
           role: 'user',
-          content: `Genera un SVG autocontenible que represente esta escena: "${prompt}". Usa <svg>, <rect>, <circle>, <line>, <text>. No incluyas explicaciones, solo el SVG.`,
+          content: `Eres el mejor ilustrador de SVGs, experto en crear gráficos vectoriales precisos, minimalistas y accesibles. Tienes gran dominio de etiquetas como <svg>, <rect>, <circle>, <line> y <text>, y sabes cómo usarlas para transmitir ideas visuales con claridad.
+
+Genera un SVG autocontenible que represente fielmente esta escena: "${prompt}". Utiliza exclusivamente las etiquetas SVG mencionadas. No incluyas explicaciones, comentarios ni ningún texto adicional fuera del SVG.`,
         },
       ]
 
@@ -50,7 +57,6 @@ export async function POST(req: NextRequest) {
 
     const rawSvg = data?.choices?.[0]?.message?.content || ''
 
-    // Extraemos solo el contenido <svg>...</svg> en caso de que venga con ```xml o texto extra
     const svgMatch = rawSvg.match(/<svg[\s\S]*<\/svg>/i)
     const cleanSvg = svgMatch ? svgMatch[0] : ''
 

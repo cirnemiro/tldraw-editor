@@ -61,7 +61,7 @@ export function GenerateSketchForm() {
         onClick={() => setIsOpen(!isOpen)}
       >
         <span className='text-sm font-medium text-muted-foreground'>
-          Sketch Generation using AI
+          SVG Generation using AI
         </span>
         {isOpen ? (
           <ChevronDown className='w-4 h-4' />
@@ -113,7 +113,7 @@ export function GenerateSketchForm() {
                     onClick={handleExportSelection}
                     id='shape-import'
                     type='button'
-                    variant='ghost'
+                    variant='secondary'
                   >
                     Import
                   </Button>
@@ -125,7 +125,6 @@ export function GenerateSketchForm() {
               disabled={form.formState.isSubmitting}
               type='submit'
               className='w-full'
-              variant='secondary'
             >
               {form.formState.isSubmitting
                 ? 'Generating...'
