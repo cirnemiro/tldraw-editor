@@ -90,7 +90,7 @@ Run the Next.js development server:
 pnpm dev
 ```
 
-### 3. 🔑 Connect your OpenAI Secret
+### 4. 🔑 Connect your OpenAI Secret
 
 To unlock the AI-powered SVG generator, you need to add your OpenAI API key to your environment variables.
 
