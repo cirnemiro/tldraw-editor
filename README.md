@@ -52,6 +52,13 @@
 - 🪄 Fully integrated with `tRPC` to update the sketch content and preview in real-time
 - 🧩 Wrapped in a custom hook for clean integration in the editor logic
 
+### 🔌 tRPC + React Query Integration
+
+- 🌐 Connects to backend procedures via `/api/trpc/{procedureName}`
+- 🔒 Fully **type-safe** client-server communication
+- ♻️ Seamless caching, loading, and mutations via React Query
+- 🧩 Wrapped in a custom provider for easy integration across the app
+
 ## 🛠️ Getting Started
 
 Follow these steps to get the project up and running locally:
